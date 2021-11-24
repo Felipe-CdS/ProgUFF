@@ -14,35 +14,27 @@ int main(void){
 		list = AddNewElementEnd(list, i);
 	}
 
-	RecursivePrintList(list);
-	printf("\n");
-
-	listSize = GetSize(list);
-
-	for(int i = 0; i <= listSize; i++){
+	for(int i = 0; i <= GetSize(list); i++){
 
 		SLL *elementAtI, *elementAtJ;
 
-		
-
-		for(int j = 0; j <= listSize; j++){
+		//j = i+1 so it doesn't check and remove itself like 2%2=0 or 3%3=0
+		for(int j = i+1; j <= GetSize(list); j++){
 
 			elementAtI = SearchByIndex(list, i);
-			elementAtJ = SearchByIndex(list, j);			
+			elementAtJ = SearchByIndex(list, j);
 
 			if(elementAtJ != 0 && elementAtI != 0){
-				printf("I: %d | J: %d\n", elementAtI->data, elementAtJ->data);
-				//if((elementAtJ->data % elementAtI->data) == 0){
-					//RemoveElement(list, elementAtJ->data);
-				//}		
+				if(!(elementAtJ->data % elementAtI->data)){	
+					list = RemoveElement(list, (elementAtJ->data));					
+				}	
 			}
-		}
-
-		//RecursivePrintList(list);
-		//printf("\n");
+		}	
 	}
 
-	
+	printf("All prime numbers until %d: \n", entry);
+	RecursivePrintList(list);
+	printf("\n");	
 
 	return 0;
 }
